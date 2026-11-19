@@ -1,0 +1,307 @@
+```html
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portofolio & Data Diri | Muhammad Fadly</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Inter & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Font Awesome untuk Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    colors: {
+                        primary: '#2563eb',
+                        secondary: '#0f172a',
+                        accent: '#3b82f6'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-blue-600 selection:text-white">
+
+    <!-- Notifikasi Toast Custom (Pengganti alert()) -->
+    <div id="toast-container" class="fixed bottom-5 right-5 z-50 flex flex-col gap-2 max-w-sm w-full pointer-events-none px-4 sm:px-0"></div>
+
+    <!-- Navbar / Header -->
+    <header class="sticky top-0 z-40 bg-white/85 backdrop-blur-md border-b border-slate-200/80 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-wrap items-center justify-between py-3.5 gap-3">
+                <!-- Brand / Logo -->
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white font-bold text-lg shadow-md shadow-blue-500/20">
+                        MF
+                    </div>
+                    <div>
+                        <h1 id="nav-name" class="font-bold text-slate-900 text-base sm:text-lg leading-tight">Muhammad Fadly</h1>
+                        <p class="text-xs text-slate-500 font-medium">Personal Portfolio & CV</p>
+                    </div>
+                </div>
+
+                <!-- Tombol Aksi Utama (Menu Identitas & Update Data Portofolio) -->
+                <div class="flex flex-wrap items-center gap-2 sm:gap-3">
+                    <!-- Tombol Menu Identitas (Dilindungi Token) -->
+                    <button onclick="openTokenModal()" class="inline-flex items-center gap-2 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 active:scale-95 text-white text-xs sm:text-sm font-semibold transition-all shadow-sm">
+                        <i class="fa-solid fa-lock text-amber-400"></i>
+                        <span>Menu Identitas</span>
+                    </button>
+
+                    <!-- Tombol Menu Update Data Utama -->
+                    <button onclick="openPortfolioModal()" class="inline-flex items-center gap-2 px-3.5 py-2 sm:px-4 sm:py-2.5 rounded-xl bg-blue-600 hover:bg-blue-700 active:scale-95 text-white text-xs sm:text-sm font-semibold transition-all shadow-md shadow-blue-600/20">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                        <span>Isi / Update Data</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section & Kontak -->
+    <section class="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-blue-950 text-white py-12 sm:py-16">
+        <!-- Dekorasi Latar Belakang -->
+        <div class="absolute inset-0 opacity-10 pointer-events-none">
+            <div class="absolute -top-24 -right-24 w-96 h-96 rounded-full bg-blue-500 blur-3xl"></div>
+            <div class="absolute -bottom-24 -left-24 w-96 h-96 rounded-full bg-indigo-500 blur-3xl"></div>
+        </div>
+
+        <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col lg:flex-row items-center justify-between gap-8">
+                <!-- Profil Singkat -->
+                <div class="flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left gap-6 max-w-2xl">
+                    <div class="relative shrink-0">
+                        <img id="hero-avatar" src="https://placehold.co/160x160/1e293b/ffffff?text=MF" alt="Foto Profil" onerror="this.src='https://placehold.co/160x160/1e293b/ffffff?text=MF'" class="w-28 h-28 sm:w-32 sm:h-32 rounded-2xl object-cover border-4 border-white/15 shadow-xl">
+                        <span class="absolute -bottom-2 -right-2 bg-emerald-500 text-white text-[10px] font-bold px-2.5 py-1 rounded-full border-2 border-slate-900 shadow">
+                            AKTIF
+                        </span>
+                    </div>
+                    <div>
+                        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 text-blue-200 text-xs font-medium mb-3">
+                            <i class="fa-solid fa-id-card"></i>
+                            <span>Portofolio Digital & Rekam Jejak</span>
+                        </div>
+                        <h2 id="hero-name" class="text-2xl sm:text-4xl font-extrabold tracking-tight text-white mb-2">
+                            Muhammad Fadly
+                        </h2>
+                        <p id="hero-bio" class="text-slate-300 text-sm sm:text-base leading-relaxed mb-4">
+                            Selamat datang di halaman portofolio pribadi saya. Halaman ini memuat ringkasan prestasi, keahlian, riwayat pendidikan, kesehatan, pengalaman organisasi, serta karya dan produk yang telah saya kembangkan.
+                        </p>
+                        <!-- Status Akses Identitas -->
+                        <div id="identity-badge-status" class="inline-flex items-center gap-2 text-xs bg-amber-500/20 border border-amber-400/30 text-amber-200 px-3 py-1.5 rounded-xl">
+                            <i class="fa-solid fa-shield-halved"></i>
+                            <span>Data Identitas Pribadi Terkunci (Klik "Menu Identitas" untuk membuka)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kartu Kontak & Sosial Media -->
+                <div class="w-full lg:w-auto bg-white/10 backdrop-blur-md border border-white/15 rounded-2xl p-5 sm:p-6 shadow-xl">
+                    <h3 class="text-xs font-bold uppercase tracking-wider text-blue-300 mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-address-book"></i> Kontak & Sosial Media
+                    </h3>
+                    <div class="flex flex-col gap-3 min-w-[260px]">
+                        <!-- WhatsApp -->
+                        <a href="https://wa.me/62895327612432" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3.5 p-3 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/30 border border-emerald-500/30 transition-all group">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-500 flex items-center justify-center text-white text-lg shrink-0 group-hover:scale-105 transition-transform">
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </div>
+                            <div>
+                                <p class="text-[11px] text-emerald-200 font-medium">WhatsApp / Telepon</p>
+                                <p class="text-sm font-bold text-white">0895327612432</p>
+                            </div>
+                        </a>
+
+                        <!-- Instagram -->
+                        <a href="https://instagram.com/mh.fadlyy" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3.5 p-3 rounded-xl bg-pink-600/20 hover:bg-pink-600/30 border border-pink-500/30 transition-all group">
+                            <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 via-pink-500 to-purple-600 flex items-center justify-center text-white text-lg shrink-0 group-hover:scale-105 transition-transform">
+                                <i class="fa-brands fa-instagram"></i>
+                            </div>
+                            <div>
+                                <p class="text-[11px] text-pink-200 font-medium">Instagram</p>
+                                <p class="text-sm font-bold text-white">@mh.fadlyy</p>
+                            </div>
+                        </a>
+
+                        <!-- TikTok -->
+                        <a href="https://www.tiktok.com/@muhmdf4" target="_blank" rel="noopener noreferrer" class="flex items-center gap-3.5 p-3 rounded-xl bg-slate-700/50 hover:bg-slate-700/80 border border-white/15 transition-all group">
+                            <div class="w-10 h-10 rounded-xl bg-black flex items-center justify-center text-white text-lg shrink-0 border border-white/20 group-hover:scale-105 transition-transform">
+                                <i class="fa-brands fa-tiktok"></i>
+                            </div>
+                            <div>
+                                <p class="text-[11px] text-slate-300 font-medium">TikTok</p>
+                                <p class="text-sm font-bold text-white">@muhmdf4</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Panel Identitas Terbuka (Muncul di halaman utama setelah Token "MuhammadF" dimasukkan) -->
+    <section id="unlocked-identity-section" class="hidden max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+        <div class="bg-white rounded-2xl border-2 border-blue-500/30 shadow-lg p-6 sm:p-8 relative overflow-hidden">
+            <div class="flex flex-wrap items-center justify-between gap-4 border-b border-slate-100 pb-4 mb-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center text-lg">
+                        <i class="fa-solid fa-user-shield"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-lg sm:text-xl font-bold text-slate-900">Biodata & Identitas Lengkap</h3>
+                        <p class="text-xs text-slate-500">Akses terverifikasi menggunakan token keamanan</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-2">
+                    <button onclick="openIdentityFormModal()" class="px-3.5 py-2 rounded-xl bg-blue-50 hover:bg-blue-100 text-blue-700 text-xs font-semibold transition-colors flex items-center gap-1.5">
+                        <i class="fa-solid fa-pen"></i> Edit Identitas
+                    </button>
+                    <button onclick="lockIdentity()" class="px-3.5 py-2 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-semibold transition-colors flex items-center gap-1.5">
+                        <i class="fa-solid fa-lock"></i> Kunci Kembali
+                    </button>
+                </div>
+            </div>
+
+            <div id="identity-display-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Diisi dinamis oleh JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Navigasi Cepat Kategori Halaman Utama -->
+    <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+        <div class="flex items-center gap-2 overflow-x-auto pb-2 no-scrollbar">
+            <a href="#sec-prestasi" class="shrink-0 px-4 py-2 rounded-xl bg-white border border-slate-200 hover:border-blue-500 hover:text-blue-600 text-xs sm:text-sm font-semibold text-slate-700 shadow-sm transition-all">
+                <i class="fa-solid fa-trophy text-amber-500 mr-1.5"></i>Prestasi
+            </a>
+            <a href="#sec-keahlian" class="shrink-0 px-4 py-2 rounded-xl bg-white border border-slate-200 hover:border-blue-500 hover:text-blue-600 text-xs sm:text-sm font-semibold text-slate-700 shadow-sm transition-all">
+                <i class="fa-solid fa-bolt text-blue-500 mr-1.5"></i>Keahlian
+            </a>
+            <a href="#sec-pendidikan" class="shrink-0 px-4 py-2 rounded-xl bg-white border border-slate-200 hover:border-blue-500 hover:text-blue-600 text-xs sm:text-sm font-semibold text-slate-700 shadow-sm transition-all">
+                <i class="fa-solid fa-graduation-cap text-indigo-500 mr-1.5"></i>Riwayat Pendidikan
+            </a>
+            <a href="#sec-penyakit" class="shrink-0 px-4 py-2 rounded-xl bg-white border border-slate-200 hover:border-blue-500 hover:text-blue-600 text-xs sm:text-sm font-semibold text-slate-700 shadow-sm transition-all">
+                <i class="fa-solid fa-notes-medical text-rose-500 mr-1.5"></i>Riwayat Penyakit
+            </a>
+            <a href="#sec-organisasi" class="shrink-0 px-4 py-2 rounded-xl bg-white border border-slate-200 hover:border-blue-500 hover:text-blue-600 text-xs sm:text-sm font-semibold text-slate-700 shadow-sm transition-all">
+                <i class="fa-solid fa-users text-emerald-500 mr-1.5"></i>Pengalaman Organisasi
+            </a>
+            <a href="#sec-karya" class="shrink-0 px-4 py-2 rounded-xl bg-white border border-slate-200 hover:border-blue-500 hover:text-blue-600 text-xs sm:text-sm font-semibold text-slate-700 shadow-sm transition-all">
+                <i class="fa-solid fa-layer-group text-purple-500 mr-1.5"></i>Karya / Produk
+            </a>
+        </div>
+    </nav>
+
+    <!-- Konten Utama Portofolio (6 Bagian Utama) -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-8">
+
+        <!-- Baris 1: Prestasi & Keahlian -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- 1. Prestasi -->
+            <section id="sec-prestasi" class="bg-white rounded-2xl border border-slate-200/80 shadow-sm p-6 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between gap-2 mb-5">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-600 flex items-center justify-center text-lg">
+                                <i class="fa-solid fa-trophy"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-slate-900">Prestasi</h3>
+                                <p class="text-xs text-slate-500">Penghargaan & pencapaian terbaik</p>
+                            </div>
+                        </div>
+                        <button onclick="openPortfolioModal('prestasi')" class="p-2.5 rounded-xl bg-slate-100 hover:bg-blue-50 text-slate-600 hover:text-blue-600 transition-colors text-xs font-semibold" title="Tambah Prestasi">
+                            <i class="fa-solid fa-plus"></i> Tambah
+                        </button>
+                    </div>
+                    <div id="list-prestasi" class="space-y-3">
+                        <!-- Diisi oleh JS -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- 2. Keahlian -->
+            <section id="sec-keahlian" class="bg-white rounded-2xl border border-slate-200/80 shadow-sm p-6 flex flex-col justify-between">
+                <div>
+                    <div class="flex items-center justify-between gap-2 mb-5">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center text-lg">
+                                <i class="fa-solid fa-bolt"></i>
+                            </div>
+                            <div>
+                                <h3 class="text-lg font-bold text-slate-900">Keahlian (Skills)</h3>
+                                <p class="text-xs text-slate-500">Kompetensi teknis & non-teknis</p>
+                            </div>
+                        </div>
+                        <button onclick="openPortfolioModal('keahlian')" class="p-2.5 rounded-xl bg-slate-100 hover:bg-blue-50 text-slate-600 hover:text-blue-600 transition-colors text-xs font-semibold" title="Tambah Keahlian">
+                            <i class="fa-solid fa-plus"></i> Tambah
+                        </button>
+                    </div>
+                    <div id="list-keahlian" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <!-- Diisi oleh JS -->
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Baris 2: Riwayat Pendidikan & Riwayat Penyakit -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- 3. Riwayat Pendidikan -->
+            <section id="sec-pendidikan" class="bg-white rounded-2xl border border-slate-200/80 shadow-sm p-6">
+                <div class="flex items-center justify-between gap-2 mb-5">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900">Riwayat Pendidikan</h3>
+                            <p class="text-xs text-slate-500">Jenjang akademik & institusi</p>
+                        </div>
+                    </div>
+                    <button onclick="openPortfolioModal('pendidikan')" class="p-2.5 rounded-xl bg-slate-100 hover:bg-blue-50 text-slate-600 hover:text-blue-600 transition-colors text-xs font-semibold">
+                        <i class="fa-solid fa-plus"></i> Tambah
+                    </button>
+                </div>
+                <div id="list-pendidikan" class="relative border-l-2 border-indigo-100 ml-3 space-y-5 pl-6 py-1">
+                    <!-- Diisi oleh JS -->
+                </div>
+            </section>
+
+            <!-- 4. Riwayat Penyakit -->
+            <section id="sec-penyakit" class="bg-white rounded-2xl border border-slate-200/80 shadow-sm p-6">
+                <div class="flex items-center justify-between gap-2 mb-5">
+                    <div class="flex items-center gap-3">
+                        <div class="w-10 h-10 rounded-xl bg-rose-100 text-rose-600 flex items-center justify-center text-lg">
+                            <i class="fa-solid fa-notes-medical"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-slate-900">Riwayat Penyakit & Kesehatan</h3>
+                            <p class="text-xs text-slate-500">Catatan medis & kondisi kesehatan</p>
+                        </div>
+                    </div>
+                    <button onclick="openPortfolioModal('penyakit')" class="p-2.5 rounded-xl bg-slate-100 hover:bg-blue-50 text-slate-600 hover:text-blue-600 transition-colors text-xs font-semibold">
+                        <i class="fa-solid fa-plus"></i> Tambah
+                    </button>
+                </div>
+                <div id="list-penyakit" class="space-y-3">
+                    <!-- Diisi oleh JS -->
+                </div>
+            </section>
+        </div>
+
+        <!-- Baris 3: Pengalaman Organisasi -->
+        <section id="sec-organisasi" class="bg-white rounded-2xl border border-slate-200/80 shadow-sm p-6">
+            <div class="flex items-center justify-between gap-2 mb-5">
+                <div class="flex items-center gap-3">
+                    <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-600 f
